@@ -88,7 +88,7 @@
                 <div class="content">
                     <h3>{{ $product->name }}</h3>
 
-                    <a href="{{ route('product.details', $product) }}" class="btn">
+                    <a href="{{ route('product.details', $product->slug) }}" class="btn">
                         View Product
                     </a>
                 </div>

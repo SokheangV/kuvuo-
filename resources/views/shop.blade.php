@@ -530,8 +530,8 @@
         </a>
 
         @foreach($categories as $category)
-        <a href="{{ route('shop.category', ['slug' => $category->slug] + request()->only(['search', 'sort'])) }}"
-           class="{{ optional($selectedCategory)->id === $category->id ? 'active' : '' }}">
+        <a href="{{ route('shop.category', array_merge(['slug' => $category->slug], request()->only(['search', 'sort']))) }}"
+           class="{{ ($selectedCategory && $selectedCategory->slug === $category->slug) ? 'active' : '' }}">
             {{ $category->name }}
         </a>
         @endforeach
@@ -559,21 +559,32 @@
 
         @forelse($products as $product)
 
-     <div class="product-card">
-    <div class="product-image-wrap">
-        <img src="{{ $product->image }}" alt="{{ $product->name }}">
-    </div>
+        <div class="product-card">
+            <div class="product-image-wrap">
+                <img
+                    src="{{ $product->image }}"
+                    alt="{{ $product->name }}"
+                    loading="lazy"
+                    onerror="this.src='https://placehold.co/400x300?text=No+Image'"
+                >
+            </div>
 
-    <div class="product-content">
-        @if($product->category)
-        <span class="product-category">{{ $product->category->name }}</span>
-        @endif
-        <h3>{{ Str::limit($product->name, 50) }}</h3>
-       <a href="{{ route('product.details', $product) }}">
-    View Details
-</a>
-    </div>
-</div>
+            <div class="product-content">
+                @if($product->category)
+                <span class="product-category">{{ $product->category->name }}</span>
+                @endif
+                <h3>{{ Str::limit($product->name, 50) }}</h3>
+                @if($product->price > 0)
+                <p style="font-size:18px;font-weight:700;color:#5d694c;margin:8px 0 0;">
+                    ${{ number_format($product->price, 2) }}
+                </p>
+                @endif
+                <a href="{{ route('product.details', $product->slug) }}">
+                    View Details
+                </a>
+            </div>
+        </div>
+
         @empty
 
         <div class="empty-state">
@@ -593,7 +604,7 @@
 
     @else
     <div class="empty-products">
-        No products found. Add products from admin panel.
+        No products match your search. Try a different keyword or category.
     </div>
     @endif
 

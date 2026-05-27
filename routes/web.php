@@ -1,19 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Product;
-use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\QuoteRequest;
 use Illuminate\Support\Facades\Mail;
 use App\Models\ContactInquiry;
 use App\Mail\ContactInquiryMail;
 use App\Http\Controllers\ShopController;
+use App\Services\CsvProductRepository;
 
 
 
 Route::get('/', function () {
-    $categories = Category::withCount('products')->get();
+    // Homepage categories come from the CSV catalog, not the DB.
+    $categories = CsvProductRepository::categories();
 
     return view('welcome', compact('categories'));
 });
@@ -44,13 +44,18 @@ Route::get('/attachments/{slug}', [ShopController::class, 'attachmentCategory'])
 |--------------------------------------------------------------------------
 */
 
-Route::get('/product/{product}', function (Product $product) {
-    $product->load('category');
+Route::get('/product/{slug}', function (string $slug) {
+    $product = CsvProductRepository::findBySlug($slug);
 
-    $relatedProducts = Product::where('category_id', $product->category_id)
-        ->where('id', '!=', $product->id)
-        ->take(3)
-        ->get();
+    if (! $product) {
+        abort(404);
+    }
+
+    $relatedProducts = CsvProductRepository::related(
+        categorySlug: $product->primaryCategorySlug,
+        excludeSlug:  $product->slug,
+        limit:        3,
+    );
 
     return view('product-details', compact('product', 'relatedProducts'));
 })->name('product.details');
@@ -62,24 +67,45 @@ Route::get('/product/{product}', function (Product $product) {
 |--------------------------------------------------------------------------
 */
 
-Route::get('/quote/{product}', function (Product $product) {
+Route::get('/quote/{slug}', function (string $slug) {
+    $product = CsvProductRepository::findBySlug($slug);
+
+    if (! $product) {
+        abort(404);
+    }
+
     return view('quote-request', compact('product'));
 })->name('quote.form');
 
 Route::post('/quote-submit', function (Request $request) {
 
-    QuoteRequest::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'phone' => $request->phone,
-        'company' => $request->company,
-        'country' => $request->country,
-        'product_id' => $request->product_id,
-        'message' => $request->message,
-        'status' => 'new',
+    $request->validate([
+        'name'    => 'required|string|max:255',
+        'email'   => 'required|email|max:255',
+        'phone'   => 'nullable|string|max:50',
+        'company' => 'nullable|string|max:255',
+        'country' => 'nullable|string|max:100',
+        'message' => 'nullable|string|max:5000',
     ]);
 
-    return redirect()->back()->with('success', 'Quote request submitted successfully!');
+    // Products are now CSV-based (no DB IDs). We store the product name in
+    // the message field so the quote record is still self-contained.
+    $productName = $request->filled('product_name')
+        ? '[Product: ' . $request->input('product_name') . '] '
+        : '';
+
+    QuoteRequest::create([
+        'name'       => $request->name,
+        'email'      => $request->email,
+        'phone'      => $request->phone,
+        'company'    => $request->company,
+        'country'    => $request->country,
+        'product_id' => null,
+        'message'    => $productName . $request->message,
+        'status'     => 'new',
+    ]);
+
+    return redirect()->back()->with('success', 'Quote request submitted! We will be in touch shortly.');
 })->name('quote.submit');
 
 
