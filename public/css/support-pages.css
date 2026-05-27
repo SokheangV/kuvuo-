@@ -1,0 +1,560 @@
+/*
+ * KUVUO — Support Pages Stylesheet
+ * Scoped: all rules are inside .sp-page or prefixed .sp-
+ * Safe to load only on /support/* routes without affecting homepage/shop.
+ */
+
+/* ── Fonts (already loaded globally, but safe to repeat here) ── */
+/* @import loaded by the layout — no duplicate needed */
+
+/* ─────────────────────────────────────────────────────────────────────
+   VARIABLES (local, do not pollute :root which is already set by layout)
+───────────────────────────────────────────────────────────────────── */
+.sp-page {
+    --sp-green:    #12372A;
+    --sp-green2:   #1F5D45;
+    --sp-accent:   #D97706;
+    --sp-text:     #111827;
+    --sp-muted:    #6B7280;
+    --sp-border:   #D7DED9;
+    --sp-surface:  #FFFFFF;
+    --sp-soft:     #F6FAF7;
+    --sp-softer:   #EEF5F0;
+    --sp-shadow:   0 6px 24px rgba(18, 55, 42, 0.06);
+    --sp-font-h:   'Science Gothic', 'Arial Narrow', Arial, sans-serif;
+    --sp-font-b:   'Nunito', 'Segoe UI', Arial, sans-serif;
+    --sp-font-btn: 'Google Sans', 'Nunito', Arial, sans-serif;
+    --sp-shell:    1240px;
+    background: #fff;
+    color: var(--sp-text);
+    font-family: var(--sp-font-b);
+    line-height: 1.65;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   SHELL / CONTAINER
+───────────────────────────────────────────────────────────────────── */
+.sp-shell {
+    width: min(calc(100% - 40px), var(--sp-shell));
+    margin: 0 auto;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   SUPPORT INDEX HERO
+───────────────────────────────────────────────────────────────────── */
+.sp-index-hero {
+    background: var(--sp-green);
+    padding: 80px 0 72px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.sp-index-hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 20px;
+}
+.sp-index-hero-eyebrow::before {
+    content: '';
+    width: 8px; height: 8px;
+    background: var(--sp-accent);
+    display: block;
+    flex-shrink: 0;
+}
+.sp-index-hero h1 {
+    font-family: var(--sp-font-h);
+    font-size: clamp(2rem, 4vw, 3.6rem);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    margin: 0 0 16px;
+}
+.sp-index-hero p {
+    font-size: 17px;
+    color: rgba(255,255,255,0.72);
+    max-width: 640px;
+    margin: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   SUPPORT INDEX CARD GRID
+───────────────────────────────────────────────────────────────────── */
+.sp-index-section {
+    padding: 72px 0 96px;
+    background: #fff;
+}
+.sp-index-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--sp-border);
+    background: var(--sp-border);
+}
+.sp-index-card {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: var(--sp-text);
+    padding: 32px 28px 28px;
+    transition: background .15s;
+    position: relative;
+}
+.sp-index-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--sp-green);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .2s ease;
+}
+.sp-index-card:hover { background: var(--sp-soft); }
+.sp-index-card:hover::before { transform: scaleX(1); }
+.sp-index-card-code {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sp-accent);
+    margin-bottom: 18px;
+}
+.sp-index-card-icon {
+    width: 48px; height: 48px;
+    border: 1.5px solid var(--sp-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    color: var(--sp-green);
+    transition: background .15s, border-color .15s;
+}
+.sp-index-card:hover .sp-index-card-icon {
+    background: var(--sp-green);
+    border-color: var(--sp-green);
+    color: #fff;
+}
+.sp-index-card h3 {
+    font-family: var(--sp-font-h);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--sp-green);
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+}
+.sp-index-card p {
+    font-size: 13.5px;
+    color: var(--sp-muted);
+    line-height: 1.55;
+    flex: 1;
+    margin: 0 0 20px;
+}
+.sp-index-card-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--sp-green);
+    margin-top: auto;
+}
+.sp-index-card-arrow svg {
+    width: 13px; height: 13px;
+    stroke: currentColor; fill: none;
+    stroke-width: 1.8; stroke-linecap: square;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   POLICY PAGE — HERO
+───────────────────────────────────────────────────────────────────── */
+.sp-hero {
+    background: #fff;
+    border-bottom: 1px solid var(--sp-border);
+    padding: 0;
+}
+.sp-hero-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+    gap: 32px;
+    align-items: stretch;
+    padding: 56px 0 40px;
+}
+.sp-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--sp-green);
+    border: 1px solid var(--sp-green);
+    padding: 4px 10px;
+    background: #fff;
+    margin-bottom: 20px;
+}
+.sp-eyebrow::before {
+    content: '';
+    width: 7px; height: 7px;
+    background: var(--sp-accent);
+    display: block;
+    flex-shrink: 0;
+}
+.sp-hero h1 {
+    font-family: var(--sp-font-h);
+    font-size: clamp(2rem, 3.5vw, 3.6rem);
+    font-weight: 700;
+    color: var(--sp-green);
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    margin: 0 0 14px;
+}
+.sp-hero-lead {
+    font-size: 16px;
+    color: var(--sp-muted);
+    max-width: 680px;
+    margin: 0 0 24px;
+}
+.sp-hero-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.sp-chip {
+    display: inline-block;
+    padding: 8px 12px;
+    border: 1px solid var(--sp-border);
+    background: #fff;
+    font-size: 12px;
+    color: var(--sp-text);
+    font-weight: 500;
+}
+.sp-hero-visual {
+    border: 1px solid var(--sp-border);
+    background: var(--sp-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    min-height: 260px;
+    padding: 24px;
+}
+.sp-hero-visual img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   POLICY PAGE — LAYOUT (sidebar + main)
+───────────────────────────────────────────────────────────────────── */
+.sp-body {
+    display: grid;
+    grid-template-columns: 272px minmax(0, 1fr);
+    gap: 28px;
+    padding: 32px 0 72px;
+    align-items: start;
+}
+
+/* Sidebar */
+.sp-sidebar {
+    position: sticky;
+    top: 80px;
+    background: #fff;
+    border: 1px solid var(--sp-border);
+    overflow: hidden;
+}
+.sp-sidebar-head {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--sp-border);
+    background: var(--sp-soft);
+}
+.sp-sidebar-head strong {
+    display: block;
+    font-family: var(--sp-font-h);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--sp-green);
+    letter-spacing: 0.04em;
+}
+.sp-sidebar-head span {
+    display: block;
+    font-size: 12px;
+    color: var(--sp-muted);
+    margin-top: 4px;
+}
+.sp-sidebar-nav {
+    padding: 8px;
+}
+.sp-sidebar-nav a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--sp-muted);
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: color .15s, background .15s, border-color .15s;
+}
+.sp-sidebar-nav a:hover,
+.sp-sidebar-nav a.sp-active {
+    color: var(--sp-green);
+    background: var(--sp-soft);
+    border-color: var(--sp-border);
+}
+.sp-sidebar-nav a::before {
+    content: '';
+    width: 4px; height: 4px;
+    background: var(--sp-accent);
+    display: block;
+    flex-shrink: 0;
+    opacity: 0;
+    transition: opacity .15s;
+}
+.sp-sidebar-nav a:hover::before,
+.sp-sidebar-nav a.sp-active::before { opacity: 1; }
+
+/* TOC */
+.sp-toc { padding: 8px; }
+.sp-toc a {
+    display: block;
+    padding: 9px 12px;
+    font-size: 13px;
+    color: var(--sp-muted);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    transition: color .15s, border-color .15s;
+}
+.sp-toc a:hover,
+.sp-toc a.active {
+    color: var(--sp-green);
+    border-left-color: var(--sp-green);
+}
+
+/* Panel note */
+.sp-panel-note {
+    margin: 8px 10px 12px;
+    padding: 12px;
+    border: 1px solid var(--sp-border);
+    background: #fbfcfb;
+    font-size: 12px;
+    color: var(--sp-muted);
+    line-height: 1.5;
+}
+
+/* Main content area */
+.sp-main { display: flex; flex-direction: column; gap: 16px; }
+
+/* ─────────────────────────────────────────────────────────────────────
+   POLICY SECTIONS
+───────────────────────────────────────────────────────────────────── */
+.sp-section {
+    background: #fff;
+    border: 1px solid var(--sp-border);
+    padding: 28px;
+    box-shadow: var(--sp-shadow);
+}
+.sp-section-label {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sp-green2);
+    margin-bottom: 10px;
+}
+.sp-section h2 {
+    font-family: var(--sp-font-h);
+    font-size: clamp(1.25rem, 2vw, 1.6rem);
+    font-weight: 700;
+    color: var(--sp-green);
+    line-height: 1.15;
+    margin: 0 0 14px;
+    letter-spacing: -0.01em;
+}
+.sp-section p {
+    color: var(--sp-text);
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 0;
+}
+.sp-section p + p { margin-top: 12px; }
+.sp-section ul,
+.sp-section ol {
+    padding-left: 20px;
+    margin: 14px 0 0;
+    color: var(--sp-text);
+}
+.sp-section li {
+    font-size: 15px;
+    line-height: 1.65;
+    margin: 8px 0;
+}
+.sp-section strong { color: var(--sp-green); }
+
+/* Notice box */
+.sp-notice {
+    background: #fffbf2;
+    border: 1px solid #f0e0b0;
+    padding: 24px 28px;
+}
+.sp-notice .sp-section-label { color: var(--sp-accent); }
+.sp-notice h2 { color: var(--sp-text); font-size: 1.1rem; }
+.sp-notice p { font-size: 14px; color: var(--sp-muted); }
+
+/* Contact box */
+.sp-contact {
+    background: var(--sp-soft);
+    border: 1px solid var(--sp-border);
+    padding: 28px;
+}
+.sp-contact h2 {
+    font-family: var(--sp-font-h);
+    font-size: 1.3rem;
+    color: var(--sp-green);
+    margin: 0 0 20px;
+}
+.sp-contact-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 14px;
+    padding: 14px 0;
+    border-top: 1px solid var(--sp-border);
+}
+.sp-contact-row:first-of-type { border-top: none; padding-top: 0; }
+.sp-contact-row > span {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--sp-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding-top: 2px;
+}
+.sp-contact-row > div {
+    font-size: 14.5px;
+    color: var(--sp-text);
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   FAQ ACCORDION
+───────────────────────────────────────────────────────────────────── */
+.sp-faq-item {
+    border-top: 1px solid var(--sp-border);
+}
+.sp-faq-item:first-child { border-top: none; }
+.sp-faq-toggle {
+    width: 100%;
+    padding: 18px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: var(--sp-font-btn);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--sp-text);
+    transition: color .15s;
+}
+.sp-faq-toggle:hover { color: var(--sp-green); }
+.sp-faq-toggle-icon {
+    width: 28px; height: 28px;
+    border: 1.5px solid var(--sp-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--sp-accent);
+    font-size: 18px;
+    line-height: 1;
+    transition: transform .2s, background .15s, border-color .15s;
+    font-style: normal;
+}
+.sp-faq-item.open .sp-faq-toggle-icon {
+    transform: rotate(45deg);
+    background: var(--sp-green);
+    border-color: var(--sp-green);
+    color: #fff;
+}
+.sp-faq-answer {
+    display: none;
+    padding: 0 0 18px;
+    font-size: 14.5px;
+    color: var(--sp-muted);
+    line-height: 1.7;
+}
+.sp-faq-item.open .sp-faq-answer { display: block; }
+
+/* ─────────────────────────────────────────────────────────────────────
+   SUPPORT CTA STRIP
+───────────────────────────────────────────────────────────────────── */
+.sp-cta-strip {
+    background: var(--sp-green);
+    padding: 52px 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+.sp-cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+.sp-cta-text h2 {
+    font-family: var(--sp-font-h);
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 8px;
+}
+.sp-cta-text p { color: rgba(255,255,255,0.72); margin: 0; font-size: 15px; }
+.sp-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background: var(--sp-accent);
+    color: #fff;
+    font-family: var(--sp-font-btn);
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    border: 2px solid var(--sp-accent);
+    flex-shrink: 0;
+    transition: background .15s, border-color .15s;
+}
+.sp-cta-btn:hover { background: #B7791F; border-color: #B7791F; }
+.sp-cta-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: square; }
+
+/* ─────────────────────────────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+    .sp-index-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 900px) {
+    .sp-hero-inner { grid-template-columns: 1fr; }
+    .sp-hero-visual { min-height: 200px; }
+    .sp-body { grid-template-columns: 1fr; }
+    .sp-sidebar { position: static; }
+}
+
+@media (max-width: 640px) {
+    .sp-shell { width: calc(100% - 32px); }
+    .sp-index-grid { grid-template-columns: 1fr; }
+    .sp-cta-inner { flex-direction: column; align-items: flex-start; }
+    .sp-contact-row { grid-template-columns: 1fr; gap: 4px; }
+    .sp-section { padding: 20px; }
+}

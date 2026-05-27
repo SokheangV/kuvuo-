@@ -4,8 +4,10 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\QuoteRequest;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\AuthController;
 use App\Models\ContactInquiry;
 use App\Mail\ContactInquiryMail;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ShopController;
 use App\Services\CsvProductRepository;
 
@@ -163,9 +165,41 @@ Route::get('/faq', function () {
     return view('faq');
 })->name('faq');
 
-Route::get('/blog', function () {
-    return view('blog');
-})->name('blog');
+/*
+|--------------------------------------------------------------------------
+| Support Center — Policy Pages
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/support', function () {
+    return view('support.index');
+})->name('support.index');
+
+Route::get('/support/warranty-policy', function () {
+    return view('support.warranty-policy');
+})->name('support.warranty');
+
+Route::get('/support/shipping-delivery', function () {
+    return view('support.shipping-delivery');
+})->name('support.shipping');
+
+Route::get('/support/return-refund-policy', function () {
+    return view('support.return-refund-policy');
+})->name('support.returns');
+
+Route::get('/support/faq', function () {
+    return view('support.faq');
+})->name('support.faq');
+
+Route::get('/support/terms-conditions', function () {
+    return view('support.terms-conditions');
+})->name('support.terms');
+
+Route::get('/support/privacy-policy', function () {
+    return view('support.privacy-policy');
+})->name('support.privacy');
+
+Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 
 Route::get('/mini-excavator-landing', function () {
     $topics = [
@@ -236,76 +270,30 @@ Route::get('/mini-excavator-landing', function () {
 |--------------------------------------------------------------------------
 */
 
-Route::get('/blog/{slug}', function ($slug) {
+Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.details');
 
-    $posts = [
+Route::middleware('guest')->group(function () {
+    Route::get('/admin/login', [AuthController::class, 'showLogin'])->name('login');
+    Route::post('/admin/login', [AuthController::class, 'login'])->name('login.attempt');
+});
 
-        'mini-excavator-buying-guide' => [
-            'category' => 'Buying Guide',
-            'title' => 'Mini Excavator Buying Guide: 7 Things to Know Before Buying',
-            'image' => 'https://images.unsplash.com/photo-1504307651254-35680f356dfd',
-            'content' => '
-                <p>Buying a mini excavator is a major investment for contractors, landscapers, farmers, and businesses.</p>
+Route::middleware('auth')->group(function () {
+    Route::post('/admin/logout', [AuthController::class, 'logout'])->name('logout');
 
-                <h2>1. Understand Your Job Requirements</h2>
-                <p>Think about digging depth, lifting capacity, and jobsite space.</p>
-
-                <h2>2. Check Engine & Hydraulic Performance</h2>
-                <p>Hydraulic flow and engine horsepower affect machine performance.</p>
-
-                <h2>3. Compare Attachments</h2>
-                <p>Attachments improve machine versatility and ROI.</p>
-            '
-        ],
-
-        'forklift-safety-tips' => [
-            'category' => 'Safety',
-            'title' => 'Forklift Safety Tips Every Operator Should Know',
-            'image' => 'https://images.unsplash.com/photo-1517048676732-d65bc937f952',
-            'content' => '
-                <p>Forklift safety is essential in warehouses and job sites.</p>
-
-                <h2>1. Inspect Before Use</h2>
-                <p>Always inspect tires, brakes, forks, and hydraulics before operation.</p>
-
-                <h2>2. Follow Load Limits</h2>
-                <p>Never exceed rated load capacity.</p>
-
-                <h2>3. Train Operators</h2>
-                <p>Certified training reduces accidents and equipment damage.</p>
-            '
-        ],
-
-        'wheel-loader-vs-skid-steer' => [
-            'category' => 'Industry Tips',
-            'title' => 'Wheel Loader vs Skid Steer: Which One Should You Buy?',
-            'image' => 'https://images.unsplash.com/photo-1489515217757-5fd1be406fef',
-            'content' => '
-                <p>Choosing between a wheel loader and skid steer depends on your workload.</p>
-
-                <h2>Wheel Loader Advantages</h2>
-                <p>Great for bulk material handling and heavy lifting.</p>
-
-                <h2>Skid Steer Advantages</h2>
-                <p>Compact, agile, and attachment-friendly.</p>
-
-                <h2>Which One Is Best?</h2>
-                <p>Depends on your jobsite size and work requirements.</p>
-            '
-        ],
-
-    ];
-
-    if (!isset($posts[$slug])) {
-        abort(404);
-    }
-
-    $post = $posts[$slug];
-
-    return view('blog-details', compact('post'));
-
-})->name('blog.details');
+    Route::prefix('/admin/blog-posts')->name('admin.blog-posts.')->group(function () {
+        Route::get('/', [BlogController::class, 'adminIndex'])->name('index');
+        Route::get('/create', [BlogController::class, 'create'])->name('create');
+        Route::post('/', [BlogController::class, 'store'])->name('store');
+        Route::get('/{post}/edit', [BlogController::class, 'edit'])->name('edit');
+        Route::put('/{post}', [BlogController::class, 'update'])->name('update');
+        Route::delete('/{post}', [BlogController::class, 'destroy'])->name('destroy');
+    });
+});
 
 Route::get('/scriptb', function () {
     return view('scriptb');
 })->name('scriptb');
+
+Route::get('/store', function () {
+    return view('store');
+})->name('store');

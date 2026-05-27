@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'KUVUO')</title>
+    <link rel="icon" type="image/webp" href="{{ asset('assets/brand/kuvuo-favicon.webp') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('assets/brand/kuvuo-favicon.webp') }}">
+    <meta name="theme-color" content="#12372A">
     @stack('head')
 
     <!-- Font Awesome -->

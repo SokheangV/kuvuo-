@@ -8,26 +8,47 @@
     <title>{{ $product->name }} - KUVUO</title>
     <meta name="description" content="{{ Str::limit(strip_tags($product->shortDescription), 160) }}">
 
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Science+Gothic:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-
-        :root {
-            --primary: #5d694c;
-            --dark:    #2f3627;
-            --light:   #f5f6f2;
-            --text:    #1f1f1f;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        body { background: #f8f8f5; color: var(--text); }
+        :root {
+            --primary: #12372A;
+            --primary-mid: #1F5D45;
+            --accent: #D97706;
+            --accent-alt: #B7791F;
+            --bg: #FFFFFF;
+            --bg-soft: #F6FAF7;
+            --text: #111827;
+            --muted: #6B7280;
+            --border: #D7DED9;
+        }
 
-        .container { width: 90%; max-width: 1400px; margin: auto; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: "Inter", sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
 
-        /* ── PRODUCT SECTION ─────────────────────────────────────────── */
-        .product-section { padding: 80px 0; }
+        .container {
+            width: 90%;
+            max-width: 1320px;
+            margin: auto;
+        }
+
+        /* Product Section */
+        .product-section {
+            padding: 60px 0 100px;
+        }
 
         .product-layout {
             display: grid;
@@ -36,29 +57,36 @@
             align-items: start;
         }
 
-        /* ── GALLERY ──────────────────────────────────────────────────── */
+        /* Gallery */
         .gallery-wrap {
-            background: white;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 0;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-main-container {
+            height: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg);
+            border: 1px solid var(--border);
             padding: 20px;
         }
 
         .gallery-main {
-            width: 100%;
-            height: 480px;
+            max-width: 100%;
+            max-height: 100%;
             object-fit: contain;
-            display: block;
-            background: white;
-            border-radius: 16px;
-            cursor: zoom-in;
             transition: opacity 0.2s;
         }
 
         .gallery-thumbs {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             margin-top: 16px;
             flex-wrap: wrap;
         }
@@ -66,10 +94,11 @@
         .gallery-thumb {
             width: 72px;
             height: 72px;
-            object-fit: cover;
-            border-radius: 10px;
+            object-fit: contain;
+            background: var(--bg);
+            border: 1px solid var(--border);
             cursor: pointer;
-            border: 2px solid transparent;
+            padding: 6px;
             transition: border-color 0.2s, opacity 0.2s;
             opacity: 0.7;
         }
@@ -78,223 +107,377 @@
         .gallery-thumb.active {
             border-color: var(--primary);
             opacity: 1;
+            box-shadow: 0 4px 10px rgba(18, 55, 42, 0.05);
         }
 
-        /* ── PRODUCT INFO ─────────────────────────────────────────────── */
-        .product-badge {
-            display: inline-block;
-            background: rgba(93,105,76,0.1);
-            color: var(--primary);
-            padding: 8px 14px;
-            border-radius: 999px;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 16px;
+        /* Product Info */
+        .product-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent-alt);
+            margin-bottom: 12px;
         }
 
         .product-info h1 {
-            font-size: 38px;
-            margin-bottom: 20px;
-            color: var(--dark);
-            line-height: 1.3;
+            font-family: "Science Gothic", Arial, sans-serif;
+            font-size: clamp(28px, 3.4vw, 40px);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .product-meta-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
         }
 
         .product-price {
-            font-size: 32px;
-            font-weight: 800;
+            font-size: 28px;
+            font-weight: 700;
             color: var(--primary);
-            margin-bottom: 24px;
         }
 
         .product-price .original-price {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 400;
-            color: #999;
+            color: var(--muted);
             text-decoration: line-through;
-            margin-left: 12px;
+            margin-left: 10px;
         }
 
         .stock-badge {
-            display: inline-block;
-            padding: 5px 14px;
-            border-radius: 999px;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 24px;
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 14px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: 0;
+            border: 1px solid transparent;
         }
 
-        .stock-badge.in-stock    { background: #dcfce7; color: #16a34a; }
-        .stock-badge.out-of-stock { background: #fee2e2; color: #dc2626; }
+        .stock-badge.in-stock {
+            background: #E8F5E9;
+            color: #2E7D32;
+            border-color: #C8E6C9;
+        }
 
+        .stock-badge.out-of-stock {
+            background: #FFEBEE;
+            color: #C62828;
+            border-color: #FFCDD2;
+        }
+
+        .short-desc {
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Actions */
         .product-actions {
             display: flex;
-            gap: 15px;
+            gap: 16px;
             margin-bottom: 35px;
             flex-wrap: wrap;
+        }
+
+        .btn-primary,
+        .btn-outline {
+            flex: 1;
+            min-width: 180px;
+            text-align: center;
+            padding: 16px 24px;
+            font-family: "Google Sans", Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 0; /* Sharp corners */
+            transition: all 0.2s;
+            cursor: pointer;
         }
 
         .btn-primary {
             background: var(--primary);
             color: white;
-            padding: 14px 28px;
-            border-radius: 999px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-block;
-            transition: background 0.2s;
+            border: 1px solid var(--primary);
         }
 
-        .btn-primary:hover { background: #4c573d; }
+        .btn-primary:hover {
+            background: var(--primary-mid);
+            border-color: var(--primary-mid);
+        }
 
         .btn-outline {
-            border: 2px solid var(--primary);
+            background: transparent;
             color: var(--primary);
-            padding: 14px 28px;
-            border-radius: 999px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-block;
-            transition: background 0.2s;
+            border: 1.5px solid var(--primary);
         }
 
-        .btn-outline:hover { background: #f5f7f2; }
-
-        /* ── SHORT DESCRIPTION ────────────────────────────────────────── */
-        .short-desc {
-            color: #555;
-            line-height: 1.8;
-            font-size: 15px;
-            margin-bottom: 28px;
+        .btn-outline:hover {
+            background: var(--bg-soft);
         }
 
-        .short-desc p { margin-bottom: 10px; }
-
-        /* ── SPECS BOX ────────────────────────────────────────────────── */
+        /* Specifications Box */
         .specs-box {
-            background: white;
-            padding: 28px 30px;
-            border-radius: 20px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.05);
-            margin-top: 8px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 28px;
+            border-radius: 0;
         }
 
         .specs-box h3 {
+            font-family: "Science Gothic", Arial, sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
             margin-bottom: 20px;
-            font-size: 22px;
-            color: var(--dark);
+            padding-bottom: 8px;
+            border-bottom: 1.5px solid var(--border);
         }
 
         .spec-row {
             display: flex;
             justify-content: space-between;
-            padding: 13px 0;
-            border-bottom: 1px solid #f0f0f0;
-            font-size: 15px;
-        }
-
-        .spec-row:last-child { border-bottom: none; }
-
-        .spec-row .spec-label { color: #666; }
-
-        .spec-row .spec-value { font-weight: 600; color: var(--dark); text-align: right; max-width: 55%; }
-
-        /* ── FULL DESCRIPTION ─────────────────────────────────────────── */
-        .description-box {
-            margin-top: 60px;
-            background: white;
-            padding: 44px;
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        }
-
-        .description-box h2 { margin-bottom: 24px; color: var(--dark); font-size: 28px; }
-
-        .description-content {
-            color: #555;
-            line-height: 1.85;
-            font-size: 15px;
-        }
-
-        .description-content p,
-        .description-content ul,
-        .description-content ol,
-        .description-content li { margin-bottom: 14px; }
-
-        .description-content h2,
-        .description-content h3,
-        .description-content h4 {
-            color: var(--dark);
-            margin: 24px 0 12px;
-            font-size: 20px;
-        }
-
-        .description-content strong { color: var(--dark); }
-
-        .description-content table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        .description-content th,
-        .description-content td {
-            padding: 10px 14px;
-            border: 1px solid #e5e7eb;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
             font-size: 14px;
         }
 
-        .description-content th { background: #f5f6f2; color: var(--dark); }
+        .spec-row:last-child {
+            border-bottom: none;
+        }
 
-        /* ── RELATED ──────────────────────────────────────────────────── */
-        .related-section { padding: 80px 0; }
+        .spec-label {
+            color: var(--muted);
+            font-weight: 500;
+        }
 
-        .related-section h2 { font-size: 36px; margin-bottom: 36px; color: var(--dark); }
+        .spec-value {
+            font-weight: 600;
+            color: var(--text);
+            text-align: right;
+            max-width: 60%;
+        }
+
+        /* Full Description */
+        .description-box {
+            margin-top: 60px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 0;
+        }
+
+        .description-box h2 {
+            font-family: "Science Gothic", Arial, sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 24px;
+            padding-bottom: 10px;
+            border-bottom: 1.5px solid var(--border);
+        }
+
+        .description-content {
+            color: var(--text);
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        /* Related Products */
+        .related-section {
+            padding: 60px 0 100px;
+            border-top: 1px solid var(--border);
+        }
+
+        .related-section h2 {
+            font-family: "Science Gothic", Arial, sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 30px;
+        }
 
         .related-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
+            gap: 24px;
         }
 
-        .related-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        .product-card {
             display: flex;
             flex-direction: column;
-            transition: transform 0.25s;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 0;
+            overflow: hidden;
+            height: 100%;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
-        .related-card:hover { transform: translateY(-5px); }
+        .product-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 8px 24px rgba(18, 55, 42, 0.08);
+        }
 
-        .related-card img {
+        .product-card__image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 1 / 1;
             width: 100%;
-            height: 220px;
+            padding: 24px;
+            background: transparent;
+            border-bottom: none;
+            position: relative;
+        }
+
+        .product-card__image img {
+            max-width: 100%;
+            max-height: 100%;
             object-fit: contain;
-            padding: 16px;
-            background: white;
+            object-position: center;
+            transition: transform 0.3s ease;
         }
 
-        .related-content { padding: 22px; }
-
-        .related-content h3 {
-            font-size: 16px;
-            color: var(--dark);
-            line-height: 1.5;
-            margin-bottom: 14px;
+        .product-card:hover .product-card__image img {
+            transform: scale(1.03);
         }
 
-        /* ── RESPONSIVE ───────────────────────────────────────────────── */
-        @media(max-width: 992px) {
-            .product-layout { grid-template-columns: 1fr; }
-            .related-grid   { grid-template-columns: repeat(2, 1fr); }
-            .product-info h1 { font-size: 28px; }
+        .product-card__body {
+            padding: 20px 20px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex-grow: 1;
+            text-align: left;
         }
 
-        @media(max-width: 600px) {
-            .related-grid { grid-template-columns: 1fr; }
-            .gallery-main { height: 300px; }
+        .product-category {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent-alt);
+        }
+
+        .product-card__body h3 {
+            font-family: "Science Gothic", Arial, sans-serif;
+            font-size: 17px;
+            font-weight: 600;
+            line-height: 1.4;
+            color: var(--text);
+            margin: 0;
+            min-height: 48px;
+            max-height: 48px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .product-price-val {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .product-card__actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .btn-view,
+        .btn-buy,
+        .btn-quote {
+            text-align: center;
+            padding: 12px 10px;
+            font-family: "Google Sans", Arial, sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 0;
+            transition: background 0.2s, border-color 0.2s, color 0.2s;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .btn-view {
+            background: var(--primary);
+            color: white;
+            border: 1px solid var(--primary);
+        }
+
+        .btn-view:hover {
+            background: var(--primary-mid);
+            border-color: var(--primary-mid);
+        }
+
+        .btn-buy {
+            background: var(--accent);
+            color: white;
+            border: 1px solid var(--accent);
+        }
+
+        .btn-buy:hover {
+            background: var(--accent-alt);
+            border-color: var(--accent-alt);
+        }
+
+        .btn-quote {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-quote:hover {
+            background: var(--bg-soft);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .product-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .related-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+            .gallery-main-container {
+                height: 320px;
+            }
+            .description-box {
+                padding: 24px;
+            }
         }
     </style>
 </head>
@@ -307,15 +490,17 @@
 
         <div class="product-layout">
 
-            {{-- ── GALLERY ─────────────────────────────────────────── --}}
+            {{-- GALLERY COLUMN --}}
             <div class="gallery-wrap">
-                <img
-                    id="gallery-main"
-                    class="gallery-main"
-                    src="{{ $product->image }}"
-                    alt="{{ $product->name }}"
-                    onerror="this.src='https://placehold.co/600x480?text=No+Image'"
-                >
+                <div class="gallery-main-container">
+                    <img
+                        id="gallery-main"
+                        class="gallery-main"
+                        src="{{ $product->image }}"
+                        alt="{{ $product->name }}"
+                        onerror="this.src='https://placehold.co/600x480?text=No+Image'"
+                    >
+                </div>
 
                 @if(count($product->gallery) > 1)
                 <div class="gallery-thumbs">
@@ -333,38 +518,39 @@
                 @endif
             </div>
 
-            {{-- ── PRODUCT INFO ─────────────────────────────────────── --}}
+            {{-- PRODUCT INFO COLUMN --}}
             <div class="product-info">
 
-                <span class="product-badge">
+                <span class="product-eyebrow">
                     {{ $product->category->name ?? 'Machinery' }}
                 </span>
 
                 <h1>{{ $product->name }}</h1>
 
-                {{-- Price --}}
-                @if($product->price > 0)
-                <div class="product-price">
-                    ${{ number_format($product->price, 2) }}
-                    @if($product->salePrice && $product->regularPrice && $product->salePrice < $product->regularPrice)
-                    <span class="original-price">${{ number_format($product->regularPrice, 2) }}</span>
+                {{-- Price & Stock --}}
+                <div class="product-meta-row">
+                    @if($product->price > 0)
+                    <div class="product-price">
+                        ${{ number_format($product->price, 2) }}
+                        @if($product->salePrice && $product->regularPrice && $product->salePrice < $product->regularPrice)
+                        <span class="original-price">${{ number_format($product->regularPrice, 2) }}</span>
+                        @endif
+                    </div>
                     @endif
+
+                    <span class="stock-badge {{ $product->inStock ? 'in-stock' : 'out-of-stock' }}">
+                        {{ $product->inStock ? '✓ In Stock' : 'Out of Stock' }}
+                    </span>
                 </div>
-                @endif
 
-                {{-- Stock status --}}
-                <span class="stock-badge {{ $product->inStock ? 'in-stock' : 'out-of-stock' }}">
-                    {{ $product->inStock ? '✓ In Stock' : 'Out of Stock' }}
-                </span>
-
-                {{-- Short description (sanitised WooCommerce HTML) --}}
+                {{-- Short description (XSS Escaped and formatted with nl2br) --}}
                 @if($product->shortDescription)
                 <div class="short-desc">
-                    {!! $product->shortDescription !!}
+                    {!! nl2br(e($product->shortDescription)) !!}
                 </div>
                 @endif
 
-                {{-- CTA buttons --}}
+                {{-- Action buttons --}}
                 <div class="product-actions">
                     @if($product->externalUrl)
                     <a
@@ -373,7 +559,7 @@
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        View in Store →
+                        Buy Now
                     </a>
                     @endif
 
@@ -382,7 +568,7 @@
                     </a>
                 </div>
 
-                {{-- Specs box --}}
+                {{-- Specs table --}}
                 <div class="specs-box">
                     <h3>Specifications</h3>
 
@@ -423,21 +609,13 @@
             </div>{{-- end .product-info --}}
         </div>{{-- end .product-layout --}}
 
-        {{-- ── FULL DESCRIPTION ──────────────────────────────────────── --}}
+        {{-- FULL DESCRIPTION --}}
         @if($product->description)
         <div class="description-box">
             <h2>Product Description</h2>
             <div class="description-content">
-                {{--
-                    SECURITY NOTE:
-                    $product->description is WooCommerce HTML that has already been
-                    run through PHP strip_tags() in CsvProductRepository, allowing
-                    only a safe subset of formatting tags (p, ul, li, strong, table…).
-                    Script, style, and iframe tags are stripped. It is safe to output
-                    with {!! !!} here, but DO NOT pass raw CSV content directly to
-                    Blade without going through CsvProductRepository first.
-                --}}
-                {!! $product->description !!}
+                {{-- STRICT SECURITY: Sanitized and escaped via e() with safe line breaks to prevent XSS --}}
+                {!! nl2br(e($product->description)) !!}
             </div>
         </div>
         @endif
@@ -445,7 +623,7 @@
     </div>
 </section>
 
-{{-- ── RELATED PRODUCTS ──────────────────────────────────────────────── --}}
+{{-- RELATED PRODUCTS --}}
 @if($relatedProducts->count())
 <section class="related-section">
     <div class="container">
@@ -454,22 +632,44 @@
 
         <div class="related-grid">
             @foreach($relatedProducts as $related)
-            <div class="related-card">
-
-                <img
-                    src="{{ $related->image }}"
-                    alt="{{ $related->name }}"
-                    loading="lazy"
-                    onerror="this.src='https://placehold.co/400x220?text=No+Image'"
-                >
-
-                <div class="related-content">
-                    <h3>{{ Str::limit($related->name, 55) }}</h3>
-                    <a href="{{ route('product.details', $related->slug) }}" class="btn-primary">
-                        View Details
-                    </a>
+            <div class="product-card">
+                <div class="product-card__image">
+                    <img
+                        src="{{ $related->image }}"
+                        alt="{{ $related->name }}"
+                        loading="lazy"
+                        onerror="this.src='https://placehold.co/400x300?text=No+Image'"
+                    >
                 </div>
 
+                <div class="product-card__body">
+                    @if($related->category)
+                    <span class="product-category">{{ $related->category->name }}</span>
+                    @else
+                    <span class="product-category">Machinery</span>
+                    @endif
+                    <h3>{{ Str::limit($related->name, 50) }}</h3>
+                    @if($related->price > 0)
+                    <div class="product-price-val">
+                        ${{ number_format($related->price, 2) }}
+                    </div>
+                    @endif
+                    
+                    <div class="product-card__actions">
+                        <a href="{{ route('product.details', $related->slug) }}" class="btn-view">
+                            View Details
+                        </a>
+                        @if($related->externalUrl)
+                        <a href="{{ $related->externalUrl }}" class="btn-buy" target="_blank" rel="noopener noreferrer">
+                            Buy Now
+                        </a>
+                        @else
+                        <a href="{{ route('quote.form', $related->slug) }}" class="btn-quote">
+                            Get Quote
+                        </a>
+                        @endif
+                    </div>
+                </div>
             </div>
             @endforeach
         </div>
