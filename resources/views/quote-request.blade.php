@@ -153,11 +153,7 @@
         >
         <div class="snapshot-info">
             <h3>{{ $product->name }}</h3>
-            <p>{{ $product->category->name ?? 'Machinery' }}
-                @if($product->price > 0)
-                &nbsp;·&nbsp; Starting at ${{ number_format($product->price, 2) }}
-                @endif
-            </p>
+            <p>{{ $product->category->name ?? 'Machinery' }}</p>
         </div>
     </div>
 

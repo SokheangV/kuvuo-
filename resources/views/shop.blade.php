@@ -522,12 +522,6 @@
                 <div class="sort-box">
                     <select name="sort" onchange="this.form.submit()">
                         <option value="">Sort by Latest</option>
-                        <option value="low" {{ request('sort') == 'low' ? 'selected' : '' }}>
-                            Price Low to High
-                        </option>
-                        <option value="high" {{ request('sort') == 'high' ? 'selected' : '' }}>
-                            Price High to Low
-                        </option>
                     </select>
                 </div>
             </form>
@@ -587,11 +581,6 @@
                     <span class="product-category">{{ $product->category->name }}</span>
                     @endif
                     <h3>{{ Str::limit($product->name, 50) }}</h3>
-                    @if($product->price > 0)
-                    <div class="product-price-val">
-                        ${{ number_format($product->price, 2) }}
-                    </div>
-                    @endif
                     
                     <div class="product-card__actions">
                         <a href="{{ route('product.details', $product->slug) }}" class="btn-view">

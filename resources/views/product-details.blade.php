@@ -529,14 +529,6 @@
 
                 {{-- Price & Stock --}}
                 <div class="product-meta-row">
-                    @if($product->price > 0)
-                    <div class="product-price">
-                        ${{ number_format($product->price, 2) }}
-                        @if($product->salePrice && $product->regularPrice && $product->salePrice < $product->regularPrice)
-                        <span class="original-price">${{ number_format($product->regularPrice, 2) }}</span>
-                        @endif
-                    </div>
-                    @endif
 
                     <span class="stock-badge {{ $product->inStock ? 'in-stock' : 'out-of-stock' }}">
                         {{ $product->inStock ? '✓ In Stock' : 'Out of Stock' }}
@@ -649,11 +641,6 @@
                     <span class="product-category">Machinery</span>
                     @endif
                     <h3>{{ Str::limit($related->name, 50) }}</h3>
-                    @if($related->price > 0)
-                    <div class="product-price-val">
-                        ${{ number_format($related->price, 2) }}
-                    </div>
-                    @endif
                     
                     <div class="product-card__actions">
                         <a href="{{ route('product.details', $related->slug) }}" class="btn-view">
