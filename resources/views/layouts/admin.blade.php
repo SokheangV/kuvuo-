@@ -257,6 +257,8 @@
             $cmsNavItems = [
                 ['label' => 'Blog Posts', 'route' => 'admin.blog-posts.index', 'note' => 'CMS'],
                 ['label' => 'Create Post', 'route' => 'admin.blog-posts.create', 'note' => 'New'],
+                ['label' => 'Products List', 'route' => 'admin.products.index', 'note' => 'Catalog'],
+                ['label' => 'Import Products', 'route' => 'admin.products.import', 'note' => 'CSV'],
             ];
         @endphp
 

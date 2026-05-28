@@ -9,6 +9,7 @@ use App\Models\ContactInquiry;
 use App\Mail\ContactInquiryMail;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\AdminProductController;
 use App\Services\CsvProductRepository;
 
 
@@ -117,9 +118,6 @@ Route::post('/quote-submit', function (Request $request) {
 |--------------------------------------------------------------------------
 */
 
-Route::get('/admin/products', function () {
-    return view('admin-products');
-})->name('admin.products');
 
 
 /*
@@ -287,6 +285,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/{post}/edit', [BlogController::class, 'edit'])->name('edit');
         Route::put('/{post}', [BlogController::class, 'update'])->name('update');
         Route::delete('/{post}', [BlogController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('/admin/products')->name('admin.products.')->group(function () {
+        Route::get('/', [AdminProductController::class, 'index'])->name('index');
+        Route::get('/import', [AdminProductController::class, 'importForm'])->name('import');
+        Route::post('/import', [AdminProductController::class, 'import'])->name('import.submit');
+        Route::post('/restore', [AdminProductController::class, 'restoreBackup'])->name('restore');
+        Route::get('/export', [AdminProductController::class, 'exportBackup'])->name('export');
     });
 });
 

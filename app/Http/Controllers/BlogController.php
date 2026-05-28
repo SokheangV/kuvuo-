@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
+use Illuminate\Database\Eloquent\Builder;
 
 class BlogController extends Controller
 {
