@@ -358,6 +358,7 @@
     border-right: none;
     font-family: inherit;
     white-space: nowrap;
+    box-sizing: border-box;
 }
 .kv-nav-link:hover,
 .kv-nav-link:focus-visible {
@@ -393,13 +394,18 @@
 ───────────────────────────────────────────────────────── */
 .kv-disclosure {
     position: relative;
-    display: flex;
-    align-items: stretch;
+    display: block;
+    height: 100%;
+    box-sizing: border-box;
 }
 .kv-disclosure > summary {
     list-style: none;
+    list-style-type: none;
+    outline: none;
+    margin: 0;
 }
 .kv-disclosure > summary::-webkit-details-marker { display: none; }
+.kv-disclosure > summary::marker { display: none; content: ""; }
 
 /* ─────────────────────────────────────────────────────────
    DROPDOWN PANELS (shared base)
@@ -730,7 +736,8 @@
     }
 
     .kv-disclosure {
-        flex-direction: column;
+        display: block;
+        height: auto;
     }
     .kv-equipment-panel,
     .kv-attachments-panel,
