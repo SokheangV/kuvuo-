@@ -4,6 +4,17 @@
  * Safe to load only on /support/* routes without affecting homepage/shop.
  */
 
+/* ── Global Browser Reset (Required since support pages don't load Tailwind Preflight) ── */
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: #fff;
+}
+*, ::before, ::after {
+    box-sizing: border-box;
+}
+
 /* ── Fonts (already loaded globally, but safe to repeat here) ── */
 /* @import loaded by the layout — no duplicate needed */
 
@@ -24,7 +35,7 @@
     --sp-font-h:   'Science Gothic', 'Arial Narrow', Arial, sans-serif;
     --sp-font-b:   'Nunito', 'Segoe UI', Arial, sans-serif;
     --sp-font-btn: 'Google Sans', 'Nunito', Arial, sans-serif;
-    --sp-shell:    1240px;
+    --sp-shell:    1320px;
     background: #fff;
     color: var(--sp-text);
     font-family: var(--sp-font-b);
@@ -35,8 +46,17 @@
    SHELL / CONTAINER
 ───────────────────────────────────────────────────────────────────── */
 .sp-shell {
-    width: min(calc(100% - 40px), var(--sp-shell));
+    /* Match the site header/footer shell (1320px, 28px gutters) so support
+       content lines up with the KUVUO logo and footer columns. */
+    width: min(calc(100% - 56px), var(--sp-shell));
     margin: 0 auto;
+}
+
+/* The sticky white header sits over white policy content, separated only by
+   a hairline. Add a soft drop shadow so it reads as a distinct bar.
+   Scoped: this stylesheet only loads on /support/* routes. */
+.kv-header {
+    box-shadow: 0 1px 0 #D7DED9, 0 8px 20px rgba(18, 55, 42, 0.07);
 }
 
 /* ─────────────────────────────────────────────────────────────────────
@@ -44,7 +64,7 @@
 ───────────────────────────────────────────────────────────────────── */
 .sp-index-hero {
     background: var(--sp-green);
-    padding: 80px 0 72px;
+    padding: 80px 0 60px;
     border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 .sp-index-hero-eyebrow {
@@ -183,7 +203,8 @@
     grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
     gap: 32px;
     align-items: stretch;
-    padding: 56px 0 40px;
+    padding: 80px 0 48px;
+    box-sizing: border-box;
 }
 .sp-eyebrow {
     display: inline-flex;
@@ -259,8 +280,9 @@
     display: grid;
     grid-template-columns: 272px minmax(0, 1fr);
     gap: 28px;
-    padding: 32px 0 72px;
+    padding: 48px 0 80px;
     align-items: start;
+    box-sizing: border-box;
 }
 
 /* Sidebar */
@@ -504,6 +526,13 @@
     padding: 52px 0;
     border-top: 1px solid rgba(255,255,255,0.08);
 }
+
+/* The CTA strip and the site footer are both dark green and sit flush
+   against each other. Add a crisp seam so they don't merge into one slab.
+   Scoped: this stylesheet only loads on /support/* routes. */
+.sp-page + .kv-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
 .sp-cta-inner {
     display: flex;
     align-items: center;
@@ -545,14 +574,18 @@
 }
 
 @media (max-width: 900px) {
-    .sp-hero-inner { grid-template-columns: 1fr; }
+    .sp-index-hero { padding: 60px 0 45px; }
+    .sp-hero-inner { grid-template-columns: 1fr; padding: 60px 0 35px; }
     .sp-hero-visual { min-height: 200px; }
-    .sp-body { grid-template-columns: 1fr; }
+    .sp-body { grid-template-columns: 1fr; padding: 32px 0 60px; }
     .sp-sidebar { position: static; }
 }
 
 @media (max-width: 640px) {
-    .sp-shell { width: calc(100% - 32px); }
+    .sp-shell { width: calc(100% - 36px); }
+    .sp-index-hero { padding: 50px 0 35px; }
+    .sp-hero-inner { padding: 50px 0 30px; }
+    .sp-body { padding: 24px 0 50px; }
     .sp-index-grid { grid-template-columns: 1fr; }
     .sp-cta-inner { flex-direction: column; align-items: flex-start; }
     .sp-contact-row { grid-template-columns: 1fr; gap: 4px; }

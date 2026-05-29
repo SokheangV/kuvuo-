@@ -270,7 +270,7 @@
         }
         .home-hero-strip > div {
             padding: 22px 26px;
-            border-right: 1px solid rgba(255,255,255,0.12);
+            border-right: 1px solid rgba(0,0,0,0.18);
             display: flex; align-items: center; gap: 14px;
         }
         .home-hero-strip > div:last-child { border-right: none; }
@@ -879,7 +879,7 @@
             .home-hero-spec.s1 { top: 14px; left: 14px; }
             .home-hero-spec.s2 { bottom: 14px; left: 14px; }
             .home-hero-strip { grid-template-columns: repeat(2, 1fr); }
-            .home-hero-strip > div { border-right: 1px solid rgba(255,255,255,0.12) !important; border-bottom: 1px solid rgba(255,255,255,0.12); }
+            .home-hero-strip > div { border-right: 1px solid rgba(0,0,0,0.18) !important; border-bottom: 1px solid rgba(0,0,0,0.18); }
             .home-hero-strip > div:nth-child(2n) { border-right: none !important; }
             .home-hero-strip > div:nth-last-child(-n+2) { border-bottom: none; }
             .home-video-grid { grid-template-columns: 1fr; }
@@ -910,7 +910,7 @@
             .home-cat-grid { grid-template-columns: 1fr; background: none; border: none; gap: 16px; }
             .home-timeline { grid-template-columns: 1fr; }
             .home-hero-strip { grid-template-columns: 1fr; }
-            .home-hero-strip > div { border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.12) !important; }
+            .home-hero-strip > div { border-right: none !important; border-bottom: 1px solid rgba(0,0,0,0.18) !important; }
             .home-hero-strip > div:last-child { border-bottom: none !important; }
             .btn { width: 100%; }
             .home-hero-ctas { flex-direction: column; align-items: stretch; }
@@ -1092,6 +1092,38 @@
             transition: border-top-color .2s ease, transform .2s ease;
         }
         #typhon-sim-v3 .ksim-spec:hover { border-top-color: var(--accent); transform: translateY(-2px); }
+
+        /* --- SIMULATOR: mobile/tablet stacking ---
+           The default `300px 1fr` grid pushes the scenario content pane off-screen
+           on narrow viewports. Below 760px, stack the tab rail above the content
+           and let the tabs scroll horizontally so every scenario stays reachable. */
+        @media (max-width: 760px) {
+            #typhon-sim-v3 .ksim-body {
+                grid-template-columns: 1fr;
+                min-height: 0;
+            }
+            #typhon-sim-v3 .ksim-tabs {
+                display: flex;
+                flex-direction: row;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                overflow-x: auto;
+                padding: 0;
+            }
+            #typhon-sim-v3 .ksim-tab {
+                width: auto;
+                flex: 0 0 auto;
+                white-space: nowrap;
+                border-left: none;
+                border-bottom: 3px solid transparent;
+            }
+            #typhon-sim-v3 .ksim-tab.active {
+                border-left-color: transparent;
+                border-bottom-color: var(--accent);
+            }
+            #typhon-sim-v3 .ksim-tab .tab-arrow { display: none; }
+            #typhon-sim-v3 .ksim-content { padding: 28px 22px; }
+        }
         /* --- THEME VARIABLES --- */
         #typhon-bento-final {
             box-sizing: border-box;
@@ -1305,7 +1337,8 @@
             position: absolute; top: -50px; right: 0;
             background: none; border: none; color: white; font-size: 36px; cursor: pointer;
         }
-        .bn-tile.hidden { display: none; }yphon-bento-final .kbento-modal-card {
+        .bn-tile.hidden { display: none; }
+        #typhon-bento-final .kbento-modal-card {
             background: #fff;
             max-width: 720px;
             width: 100%;

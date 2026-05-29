@@ -18,8 +18,8 @@
         }
 
         :root {
-            --primary: #5d694c;
-            --dark: #2f3627;
+            --primary: #12372A;
+            --dark: #111827;
             --light: #f5f6f2;
             --text: #1f1f1f;
         }
@@ -30,9 +30,10 @@
         }
 
         .container {
-            width: 90%;
-            max-width: 1400px;
-            margin: auto;
+            width: 100%;
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 28px;
         }
 
         /* NAVBAR */

@@ -11,7 +11,7 @@
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        :root { --primary: #5d694c; --dark: #2f3627; }
+        :root { --primary: #12372A; --dark: #111827; }
         body { background: #f8f8f5; color: #1f1f1f; }
         .container { width: 90%; max-width: 900px; margin: auto; }
 
@@ -112,7 +112,7 @@
             margin-top: 10px;
         }
 
-        .btn-submit:hover { background: #4c573d; }
+        .btn-submit:hover { background: #0d2a20; }
 
         .alert-success {
             background: #dcfce7;

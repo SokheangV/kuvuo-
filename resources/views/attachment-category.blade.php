@@ -14,7 +14,7 @@ FILE: resources/views/attachment-category.blade.php
     <style>
         * {margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
         body {background:#f8f8f5;color:#1f1f1f;}
-        .container {width:90%;max-width:1400px;margin:auto;}
+        .container {width:100%;max-width:1320px;margin:0 auto;padding:0 28px;}
 
         .hero {
             padding:80px 0;
@@ -24,7 +24,7 @@ FILE: resources/views/attachment-category.blade.php
 
         .hero h1 {
             font-size:48px;
-            color:#2f3627;
+            color:#111827;
         }
 
         .grid {
@@ -54,13 +54,13 @@ FILE: resources/views/attachment-category.blade.php
         .content h3 {
             min-height:60px;
             margin-bottom:15px;
-            color:#2f3627;
+            color:#111827;
         }
 
         .btn {
             display:inline-block;
             padding:10px 18px;
-            background:#5d694c;
+            background:#12372A;
             color:white;
             text-decoration:none;
             border-radius:999px;

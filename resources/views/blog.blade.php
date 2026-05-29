@@ -63,9 +63,9 @@
     }
 
     .blog-shell {
-        max-width: 1200px;
+        max-width: 1320px;
         margin: 0 auto;
-        padding: 0 24px;
+        padding: 0 28px;
     }
 
     /* Hero Section */
@@ -107,13 +107,12 @@
     /* Category Navigation */
     .blog-categories-wrap {
         display: flex;
-        justify-content: center;
         overflow-x: auto;
-        padding: 4px;
+        padding: 4px 16px;
         margin-top: 10px;
         -webkit-overflow-scrolling: touch;
     }
-    
+
     .blog-categories-wrap::-webkit-scrollbar {
         display: none;
     }
@@ -122,6 +121,7 @@
         display: flex;
         gap: 8px;
         flex-wrap: nowrap;
+        margin: 0 auto;
     }
 
     .blog-cat-link {

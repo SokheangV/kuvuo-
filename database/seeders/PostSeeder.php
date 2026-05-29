@@ -15,7 +15,7 @@ class PostSeeder extends Seeder
                 'slug' => 'mini-excavator-buying-guide',
                 'category' => 'Buying Guide',
                 'excerpt' => 'Thinking about adding a compact excavator to your fleet? From transport weights and hydraulic flow requirements to zero-tail-swing physics and operator cabin comfort, here is exactly how to specify and compare mini excavators like an industry veteran.',
-                'featured_image' => 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=1200',
+                'featured_image' => 'https://americanminiexcavator.com/wp-content/uploads/2026/05/blog12-1.webp',
                 'content' => '<p>Buying a mini excavator is a major investment for contractors, landscapers, farmers, and utility crews. These machines have quickly become the Swiss Army knives of modern jobsites due to their compact size, high hydraulic power, and attachment versatility. However, with dozens of brands and configurations available, choosing the right unit requires looking far beyond the brand sticker or the price tag. Specifying the wrong machine can lead to wasted fuel, logistics headaches, or equipment that is underpowered for your active workloads.</p>
 
 <h3>1. Operating Weight and Transport Logistics</h3>
@@ -70,7 +70,7 @@ Taking the time to specify the exact parameters of your compact excavator ensure
                 'slug' => 'forklift-safety-tips',
                 'category' => 'Safety',
                 'excerpt' => 'Forklift accidents account for nearly 100,000 workplace injuries each year. Minimize risk, safeguard warehouse assets, and protect your crew with this comprehensive checklist of operational safety procedures and pre-shift inspections.',
-                'featured_image' => 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=1200',
+                'featured_image' => 'https://americanforklift.org/wp-content/uploads/2026/05/blog8-1.png',
                 'content' => '<p>Industrial forklifts are the backbone of modern logistics, shipping docks, and manufacturing plants. They move millions of tons of freight every single day. But their heavy counterweights, narrow wheel bases, and front-loading mechanics also make them highly dangerous when operated carelessly. According to safety statistics, forklift tips and pedestrian strikes are among the leading causes of severe industrial injuries. Developing a strict culture of forklift safety is essential to protecting your workforce and protecting your inventory.</p>
 
 <h3>1. Conduct a Rigorous Pre-Shift Inspection</h3>
@@ -129,7 +129,7 @@ The forklift’s center of gravity (CG) shifts dynamically as you lift and carry
                 'slug' => 'wheel-loader-vs-skid-steer',
                 'category' => 'Industry Tips',
                 'excerpt' => 'Struggling to choose between a compact wheel loader and a heavy-duty skid steer? This head-to-head comparison breaks down operating costs, visibility, cycle times, tire wear, and work versatility to help you pick the right machine.',
-                'featured_image' => 'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&q=80&w=1200',
+                'featured_image' => 'https://americanskidsteer.com/wp-content/uploads/2026/05/blog67.png',
                 'content' => '<p>When it comes to moving soil, loading gravel, clearing snow, or running attachment tools, contractors face one of the most classic debates in the heavy equipment industry: <strong>Wheel Loader vs. Skid Steer Loader</strong>. While both machines carry materials and lift buckets, their chassis designs, steering mechanics, and operating systems are completely different. Choosing the wrong platform can result in excessive tire wear, poor cycle times, or structural site damage. Here is a practical breakdown to help you match the right machine to your daily jobsites.</p>
 
 <h3>1. Maneuverability & Site Impact</h3>

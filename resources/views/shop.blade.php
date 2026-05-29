@@ -143,6 +143,7 @@
             border-radius: 0; /* Sharp corners */
             position: sticky;
             top: 110px;
+            min-width: 0; /* allow grid item to shrink on narrow viewports */
         }
 
         .filter-group h3 {
@@ -203,6 +204,7 @@
         /* Results Right Panel */
         .shop-results {
             width: 100%;
+            min-width: 0; /* allow grid item to shrink instead of forcing track wider than viewport */
         }
 
         .results-header {
@@ -420,7 +422,10 @@
         /* override tailwind pagination to be square and KUVUO themed */
         .pagination-wrap nav {
             display: flex;
+            flex-wrap: wrap; /* never force horizontal page scroll on small screens */
+            justify-content: center;
             gap: 6px;
+            max-width: 100%;
         }
 
         .pagination-wrap nav span,
@@ -451,6 +456,11 @@
             background: var(--primary) !important;
             color: white !important;
             border-color: var(--primary) !important;
+        }
+
+        .pagination-wrap nav .page-disabled {
+            opacity: 0.4;
+            cursor: default;
         }
 
         .pagination-wrap svg {
@@ -602,7 +612,7 @@
         </div>
 
         <div class="pagination-wrap">
-            {{ $products->links() }}
+            {{ $products->links('vendor.pagination.kuvuo') }}
         </div>
     </div>
     @else

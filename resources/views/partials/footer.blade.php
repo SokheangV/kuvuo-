@@ -101,6 +101,12 @@
 </footer>
 
 <style>
+    .kv-footer,
+    .kv-footer * {
+        box-sizing: border-box;
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
     .kv-footer {
         --kv-footer-bg: #132E24;
         --kv-footer-border: rgba(255, 255, 255, 0.1);

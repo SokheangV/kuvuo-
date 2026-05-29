@@ -19,7 +19,7 @@
     }
 
     .ecwid-shop-wrap {
-        max-width: 1400px;
+        max-width: 1320px;
         margin: auto;
     }
 
@@ -29,7 +29,7 @@
     }
 
     .ecwid-shop-heading h1 {
-        color: #2f3627;
+        color: #111827;
         font-size: 42px;
         font-weight: 800;
         line-height: 1.2;
@@ -44,12 +44,12 @@
 
     #my-store-80100025 {
         --ec-font-family: 'Inter', sans-serif;
-        --ec-color-button: #5d694c;
-        --ec-btn-primary-background: #5d694c;
-        --ec-btn-primary-background-hover: #4c573d;
-        --ec-color-link: #5d694c;
-        --ec-color-link-hover: #4c573d;
-        --ec-color-price: #2f3627;
+        --ec-color-button: #12372A;
+        --ec-btn-primary-background: #12372A;
+        --ec-btn-primary-background-hover: #0d2a20;
+        --ec-color-link: #12372A;
+        --ec-color-link-hover: #0d2a20;
+        --ec-color-price: #111827;
         --ec-color-text: #1f1f1f;
         --ec-color-background: #f8f8f5;
         --ec-color-border: #e2e5dc;
