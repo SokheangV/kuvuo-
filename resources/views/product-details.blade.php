@@ -548,8 +548,6 @@
                     <a
                         href="{{ $product->externalUrl }}"
                         class="btn-primary"
-                        target="_blank"
-                        rel="noopener noreferrer"
                     >
                         Buy Now
                     </a>
@@ -646,7 +644,7 @@
                             View Details
                         </a>
                         @if($related->externalUrl)
-                        <a href="{{ $related->externalUrl }}" class="btn-buy" target="_blank" rel="noopener noreferrer">
+                        <a href="{{ $related->externalUrl }}" class="btn-buy">
                             Buy Now
                         </a>
                         @else
