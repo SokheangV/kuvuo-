@@ -535,10 +535,10 @@
                     </span>
                 </div>
 
-                {{-- Short description (XSS Escaped and formatted with nl2br) --}}
+                {{-- Short description --}}
                 @if($product->shortDescription)
                 <div class="short-desc">
-                    {!! nl2br(e($product->shortDescription)) !!}
+                    {!! $product->shortDescription !!}
                 </div>
                 @endif
 
@@ -606,8 +606,7 @@
         <div class="description-box">
             <h2>Product Description</h2>
             <div class="description-content">
-                {{-- STRICT SECURITY: Sanitized and escaped via e() with safe line breaks to prevent XSS --}}
-                {!! nl2br(e($product->description)) !!}
+                {!! $product->description !!}
             </div>
         </div>
         @endif
