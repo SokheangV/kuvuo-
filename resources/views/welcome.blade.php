@@ -1123,6 +1123,23 @@
             }
             #typhon-sim-v3 .ksim-tab .tab-arrow { display: none; }
             #typhon-sim-v3 .ksim-content { padding: 28px 22px; }
+            
+            /* Responsive specs grid - 2 columns on tablet/mobile */
+            #typhon-sim-v3 .ksim-specs {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            #typhon-sim-v3 .ksim-spec {
+                padding: 12px 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Single column on smaller mobile devices */
+            #typhon-sim-v3 .ksim-specs {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
         }
         /* --- THEME VARIABLES --- */
         #typhon-bento-final {
